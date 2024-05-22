@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView;
 import android.view.View;
+import android.content.Intent;
+
 
 import com.example.menudemoHW.CustomArrayAdapter;
 
@@ -32,10 +34,16 @@ public class MainActivity extends AppCompatActivity {
         drinksSelection = findViewById(R.id.drinks_selection);
 
         // 设置类别下拉式选择菜单的数据
+//        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,
+//                R.array.category_array, android.R.layout.simple_spinner_item);
+//        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        categorySpinner.setAdapter(categoryAdapter);
+
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.category_array, android.R.layout.simple_spinner_item);
+                R.array.category_array, R.layout.spinner_item);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
+
 
         // 设置类别下拉式选择菜单的监听器
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -91,10 +99,23 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.action_submit) {
-            // Handle submit action
+            // 获取用户选择的主餐、附餐和饮料
+            String mainCourse = mainCourseSelection.getText().toString();
+            String sideDish = sideDishSelection.getText().toString();
+            String drinks = drinksSelection.getText().toString();
+
+            // 创建Intent并传递数据
+            Intent intent = new Intent(MainActivity.this, DisplaySelectionActivity.class);
+            intent.putExtra("MAIN_COURSE", mainCourse);
+            intent.putExtra("SIDE_DISH", sideDish);
+            intent.putExtra("DRINKS", drinks);
+            startActivity(intent);
             return true;
         } else if (itemId == R.id.action_cancel) {
-            // Handle cancel action
+            // 重置选择
+            mainCourseSelection.setText("請選擇");
+            sideDishSelection.setText("請選擇");
+            drinksSelection.setText("請選擇");
             return true;
         } else {
             return super.onOptionsItemSelected(item);
