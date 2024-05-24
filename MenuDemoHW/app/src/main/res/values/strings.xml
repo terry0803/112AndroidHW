@@ -12,12 +12,14 @@
         <item>豬肉漢堡</item>
         <item>牛肉漢堡</item>
         <item>雞肉漢堡</item>
+        <item>炸魚漢堡</item>
     </string-array>
 
     <string-array name="side_dish_array">
         <item>沙拉</item>
         <item>玉米濃湯</item>
         <item>海鮮濃湯</item>
+        <item>蘋果派</item>
     </string-array>
 
     <string-array name="drinks_array">
